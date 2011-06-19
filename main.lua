@@ -119,6 +119,22 @@ function Sprite:behavior() end
 
 ----------------------------------------
 
+local TestObject = Sprite:clone()
+
+function TestObject:init()
+  Sprite.init(self, 1, 7)
+end
+
+function TestObject:behavior()
+  local x = math.random(25)
+  if x <= 3 then
+    local d = {"up","down","left","right"}
+    self:moveDir( d[x+1] )
+  end
+end
+
+----------------------------------------
+
 local Player = Sprite:clone()
 
 function Player:init()
@@ -183,7 +199,7 @@ function Game:init()
   self.layer = Layer:new()
   self.painter = Painter:new()
   local player = Player:new()
-  local sprite = Sprite:new(1, 7)
+  local sprite = TestObject:new()
   self.layer:set(0, 0, player)
   self.layer:set(30, 15, sprite)
 end
